@@ -1,4 +1,5 @@
 import React from "react";
+import lodash from "lodash";
 
 export type ButtonProps = {
   /**
@@ -8,5 +9,6 @@ export type ButtonProps = {
 };
 
 export function Button(props: ButtonProps) {
+  const x = lodash.last([1, 2, 3]);
   return <button>{props.text}</button>;
 }

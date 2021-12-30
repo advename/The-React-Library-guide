@@ -9,7 +9,7 @@
     "esModuleInterop": true,
     // Specify the file lookup resolution algorithm when importing
     // We must use the Node.js algorithm
-    "moduleResolution": "node",
+    "moduleResolution": "node",    
     // Types should go into this directory.
     // Removing this would place the .d.ts files next to the .js files
     "outDir": "dist/types",
@@ -22,7 +22,9 @@
     // "Go to Definition" in VSCode
     "declarationMap": true,
     // Skip type checking all ".d.ts" files.
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    // Ensure that Babel can safely transpile files in the TypeScript project
+    "isolatedModules": true
   },
   // Include the following directories
   "include": ["src"],
@@ -35,6 +37,7 @@
     "**/__mocks__",
     "**/__snapshots__",
     "**/*.test.*",
+    "**/*.spec.*",
     "**/*.mock.*"
   ]
 }
