@@ -1,11 +1,11 @@
 module.exports = {
   presets: [
-    "@babel/preset-env",
+    ["@babel/preset-env", {"modules": false} ],
     [
       "@babel/preset-react",
       {
         // Use the modern JSX runtime technique with "automatic"
-        // This removes need to import react in each file
+        // This removes the need to import react in each file
         // Read more: https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform
         runtime: "automatic",
       },
