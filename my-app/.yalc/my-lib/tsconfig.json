@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    // Tells TypeScript to explicitly ignore ".js" files
+    "allowJs": false,
+    // Inform typescript that this is a react project
+    "jsx": "react",
+    // Enable interoperability helper between ESM and CJS modules
+    // React library yields CJS modules which we import with the "import" statement
+    "esModuleInterop": true,
+    // Specify the file lookup resolution algorithm when importing
+    // We must use the Node.js algorithm
+    "moduleResolution": "node",    
+    // Types should go into this directory.
+    // Removing this would place the .d.ts files next to the .js files
+    "outDir": "dist/types",
+    // Generate d.ts files
+    "declaration": true,
+    // This compiler run should only output d.ts files
+    "emitDeclarationOnly": true,
+    // Create sourcemaps for d.ts files.
+    // go to ".js" file when using IDE functions like
+    // "Go to Definition" in VSCode
+    "declarationMap": true,
+    // Skip type checking all ".d.ts" files.
+    "skipLibCheck": true,
+    // Ensure that Babel can safely transpile files in the TypeScript project
+    "isolatedModules": true
+  },
+  // Include the following directories
+  "include": ["src"],
+  // Optional, exclude some patterns from typescript
+  "exclude": [
+    "dist",
+    "node_modules",
+    "lib",
+    "**/__tests__",
+    "**/__mocks__",
+    "**/__snapshots__",
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/*.mock.*"
+  ]
+}
