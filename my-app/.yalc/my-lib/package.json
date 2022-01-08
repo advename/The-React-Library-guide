@@ -5,18 +5,21 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm-run-all --sequential 'build:clean' 'build:types' 'build:bundles'",
+    "build:clean": "rimraf dist",
+    "build:types": "tsc",
+    "build:bundles": "rollup -c"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    
+    "lodash-es": "^4.17.21",
+    "rollup-plugin-svgo": "^1.1.0"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "lodash-es": "^4.17.21"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
-  "yalcSig": "28915e9209787997e184f21623aa4211"
+  "yalcSig": "444102fbc90b55763b55eb6e17427332"
 }

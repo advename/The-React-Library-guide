@@ -1,7 +1,8 @@
 // @ts-nocheck
 import React from "react";
 import { last } from "lodash-es"; // ESM version of lodash
-import dog from "./../../../assets/dog.jpg";
+// import dog from "./../../../assets/dog.jpg";
+import dog from "./dog.jpg";
 import pin from "./../../../assets/push-pin-blue.svg";
 
 export type ButtonProps = {
@@ -11,7 +12,7 @@ export type ButtonProps = {
   text: string;
 };
 
-export function Button(props: ButtonProps) {
+export function Paint(props: ButtonProps) {
   const lastVal = last([1, 2, 3]);
   return (
     <div>
