@@ -824,6 +824,8 @@ These variations are, just like ours, slightly opinionated and should be careful
 
 In the long run, above's `package.json` is a solid base, favoring CJS over ESM in times of transitioning (lasting years to come) and thereby providing better support for **all environments**.
 
+> We refrained from using `.cjs` and `.mjs` file extensions since Browser support is vague. E.g. Both Chrome ^[[JavaScript modules · V8](https://v8.dev/features/modules)] and Firefox^[[Aside — .mjs versus .js](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#aside_%E2%80%94_.mjs_versus_.js)] ^[[MJS Push request for Firefox](https://hg.mozilla.org/mozilla-central/rev/4d198d162b2a)] support the `.mjs` file extension, but not much is known for Safari, Opera,...
+
 Some additional good reads:
 - [Configuring packages for Node.js | Jakob J. Ingleheimer](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed)
 - [Hybrid npm packages | Dr. Axel Rauschmayer](https://2ality.com/2019/10/hybrid-npm-packages.html)
