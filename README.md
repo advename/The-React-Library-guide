@@ -1,7 +1,7 @@
 # :construction: Under construction :construction:
 This repo is under construction.
 
-For the incoming reviewers, here are some bulletpoints:
+#### For the incoming reviewers, here are some bulletpoints:
 -  feel free to fork and make change requests
 -  nothing has to stay, everything may be updated
 -  As for now, I used inline footnotes, e.g. `^[[Text for footnote](www.example.com)]`, which unfortunately are not supported in Github. I'll fix this in the next days
@@ -11,7 +11,7 @@ For the incoming reviewers, here are some bulletpoints:
 -  Cherry picking may me erroneous and needs rework - or please point me out to what Cherry picking actually refers to.
 -  The code examples are not finalized yet - please ignore the files in `my-lib` and `my-app`. I'm still playing around with them.
 -  Please pour as much knowledge as possible into this guide - as it will not only help me, but likely the whole dev community (okay okay,... I'll jump off my high horse now)
--  and finally, THANK YOU SO MUCH FOR ANSWERING ALL QUESTIONS, THE SUPPORT AND TAKING TIME JUST LOOKING OVER IT <3, I'll add you guys to the Contributors section during the release
+-  And, thank you all so much for answering questions, the support and the time taken to look over it! Regardless of how much you will contribute from now on, I'll add any single one of you guys to the Contributors section during the release (unless inform me not to shame your name)
 
 
 
@@ -32,6 +32,7 @@ At the end of this guide, you're able to build a Node.js/React library with:
 # Table of contents
 
 - [:construction: Under construction :construction:](#construction-under-construction-construction)
+      - [For the incoming reviewers, here are some bulletpoints:](#for-the-incoming-reviewers-here-are-some-bulletpoints)
 - [The open source Node.js/React library guide](#the-open-source-nodejsreact-library-guide)
 - [Table of contents](#table-of-contents)
 - [1.0.0 – Foundation](#100--foundation)
