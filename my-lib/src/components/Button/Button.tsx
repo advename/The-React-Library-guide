@@ -1,8 +1,9 @@
 // @ts-nocheck
 import React from "react";
 import { last } from "lodash-es"; // ESM version of lodash
-import dog from "./../../../assets/dog.jpg";
+// import dog from "./../../../assets/dog.jpg";
 import pin from "./../../../assets/push-pin-blue.svg";
+import styles from "./Button.module.scss";
 
 export type ButtonProps = {
   /**
@@ -14,8 +15,8 @@ export type ButtonProps = {
 export function Button(props: ButtonProps) {
   const lastVal = last([1, 2, 3]);
   return (
-    <div>
-      <img src={dog} alt="Logo" />
+    <div className={styles.banana}>
+      <img src={pin} alt="Logo" />
       <button>
         {props.text} -T {lastVal}
       </button>
