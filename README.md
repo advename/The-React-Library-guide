@@ -62,6 +62,7 @@ At the end of this guide, you're able to build a Node.js/React library with:
   - [2.1.0 – How does a library work?](#210--how-does-a-library-work)
     - [2.0.1 – Multi module libraries](#201--multi-module-libraries)
       - [The `exports` field](#the-exports-field)
+      - [Dual package hazards](#dual-package-hazards)
     - [2.1.2 – What to expose?](#212--what-to-expose)
       - [Inspecting libraries](#inspecting-libraries)
 - [3.0.0 – Building the library](#300--building-the-library)
@@ -755,6 +756,17 @@ The reason the last example worked is that an [absolute specifier](https://nodej
 
 It is recommended to keep `main`, `module` and `types` field as fallbacks for older Node.js versions, bundlers, and typescript definitions which not yet fully support the `exports` field. 
 
+#### Dual package hazards
+> When an application is using a package that provides both CJS and ESM module sources, there is a risk of certain bugs if both versions of the package get loaded. 
+>
+> This potential comes from the fact that the package instance created by `const pkgInstance = require('pkg')` is not the same as the package instance created by `import pkgInstance from "pkg"` (or an alternative main path like `"pkg/module"`)
+>
+>While it is unlikely that an application or package would intentionally load both versions directly, it is common for an application to load one version while a dependency of the application loads the other version. This hazard can happen because Node.js supports intermixing CommonJS and ES modules, and can lead to unexpected behavior.
+>
+> -- [Node.js Dual package hazard](https://nodejs.org/api/packages.html#dual-package-hazard)
+
+
+
 ### 2.1.2 – What to expose?
 There is no single correct answers as it depends on *compatibility* and *performance*. We will deal later on with the implementations. 
 
@@ -808,10 +820,14 @@ A new React library, should output in its `package.json`
 
 You will find many `package.json` variations on the web for libraries. These may differ in prioritizing ESM over CJS ^[https://nodejs.org/api/packages.html#dual-commonjses-module-packages], completely ignore a UMD bundle for CDNs or use multiple `package.json`'s to create a more optimized setup. ^[https://2ality.com/2019/10/hybrid-npm-packages.html#option-4%3A-bare-import-esm%2C-deep-import-commonjs-with-.mjs-and-.cjs]
 
-These variations are slightly opinionated and should be carefully selected, i.e., you should understand the choices made to do X over Y.
+These variations are, just like ours, slightly opinionated and should be carefully selected, i.e., you should understand the choices made to do X over Y.
 
 In the long run, above's `package.json` is a solid base, favoring CJS over ESM in times of transitioning (lasting years to come) and thereby providing better support for **all environments**.
 
+Some additional good reads:
+- [Configuring packages for Node.js | Jakob J. Ingleheimer](https://dev.to/jakobjingleheimer/configuring-commonjs-es-modules-for-nodejs-12ed)
+- [Hybrid npm packages | Dr. Axel Rauschmayer](https://2ality.com/2019/10/hybrid-npm-packages.html)
+- [Dual packages | Node.js](https://nodejs.org/api/packages.html#dual-commonjses-module-packages)
 
 #### Inspecting libraries
 Libraries usually host their source code on a code repository website like GitHub. However, only the source code, not the build codes, reside there.
