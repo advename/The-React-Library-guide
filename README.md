@@ -1086,34 +1086,29 @@ Where:
 - [`@babel/preset-typescript`](https://babeljs.io/docs/en/babel-preset-typescript) – set of plugins to support typescript
 
 With that, we can now create a basic Babel config file.
-**`/babel.config.js`**
+**`/.babelrc`**
 ```js
 /**
  * Note: presets Order DOES matter, 
  * reads from bottom to top: https://stackoverflow.com/a/39798873/3673659
+ * 
+ * And yes, comments are allowed in .babelrc JSON files
  */
-
-module.exports = {
-  presets: [
-    [
-      "@babel/preset-env", 
-      {
-        // Optional when using rollup, look explanation below
-        modules: false
-      }
-    ],
+{
+  "presets": [
+    ["@babel/preset-env", { "modules": false }],
     [
       "@babel/preset-react",
       {
         // Use the modern JSX runtime technique with "automatic"
-        // This removes need to import react in each file
+        // This removes the need to import react in each file
         // Read more: https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#whats-a-jsx-transform
-        runtime: "automatic",
-      },
+        "runtime": "automatic"
+      }
     ],
-    "@babel/preset-typescript",
-  ],
-};
+    "@babel/preset-typescript"
+  ]
+}
 ```
 `@babel/preset-env` transpiles to a JavaScript version specified by a browser target list. These targets are powered by [browserslist](https://github.com/browserslist/browserslist) and the default aims at supporting [`> 0.5%, last 2 versions, Firefox ESR, not dead`](https://github.com/browserslist/browserslist#full-list) which suffices for our case. 
 
@@ -1622,9 +1617,9 @@ CSS, SASS, CSS Modules, … stylesheet support is done with the [`rollup-plugin-
 > `rollup-plugin-postcss` is the first unofficial Rollup plugin we introduce. It's maintained by [many contributors](https://github.com/egoist/rollup-plugin-postcss/graphs/contributors) and over [300.000 weekly downloads on npmjs](https://www.npmjs.com/package/rollup-plugin-postcss).
 
 ```sh
-yarn add --dev rollup-plugin-postcss
+yarn add --dev rollup-plugin-postcss postcss
 # Or with npm:
-npm install --save-dev rollup-plugin-postcss
+npm install --save-dev rollup-plugin-postcss postcss
 ```
 
 **`/rollup.config.js`**

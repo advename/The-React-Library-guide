@@ -4,6 +4,7 @@ import pkg from "./package.json"; // was require
 import { babel } from "@rollup/plugin-babel";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import postcss from 'rollup-plugin-postcss'
 
 import image from "@rollup/plugin-image";
 
@@ -11,7 +12,9 @@ import image from "@rollup/plugin-image";
 
 const ism = [
   image(),
-
+  postcss({
+    modules: true
+  })
 ];
 
 // Shared
