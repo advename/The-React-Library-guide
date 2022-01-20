@@ -62,6 +62,7 @@ export default [
     external: [
       ...Object.keys(pkg.dependencies || {}), // <-- UPDATED
       ...Object.keys(pkg.peerDependencies || {}), // <-- UPDATED
+      "react/jsx-runtime", // <- uncommenting this removes jsx-runtime beeing bundled
     ],
   },
 ];
