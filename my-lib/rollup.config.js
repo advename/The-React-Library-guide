@@ -7,6 +7,12 @@ import postcss from "rollup-plugin-postcss";
 // Shared
 const extensions = [".js", ".jsx", ".ts", ".tsx", ".css"];
 
+
+const manualChunks = {
+  index: ["src/index.ts"],
+  icons: ["src/icons/index.tsx"],
+};
+
 export default [
   // CJS and ESM
   {
@@ -18,10 +24,12 @@ export default [
       {
         dir: "./dist",
         format: "cjs",
+        manualChunks,
       },
       {
         dir: "./dist",
         format: "esm",
+        manualChunks,
         entryFileNames: "[name].mjs",
         chunkFileNames: "[name]-[hash].mjs",
       },

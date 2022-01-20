@@ -1,10 +1,6 @@
-'use strict';
-
-var require$$0 = require('react');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var require$$0__default = /*#__PURE__*/_interopDefaultLegacy(require$$0);
+import require$$0 from 'react';
+import { last } from 'lodash-es';
+import { Pin as SvgPin } from './icons.mjs';
 
 var jsxRuntime = {exports: {}};
 
@@ -18,7 +14,7 @@ var reactJsxRuntime_production_min = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var f=require$$0__default["default"],g=60103;reactJsxRuntime_production_min.Fragment=60107;if("function"===typeof Symbol&&Symbol.for){var h=Symbol.for;g=h("react.element");reactJsxRuntime_production_min.Fragment=h("react.fragment");}var m=f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,n=Object.prototype.hasOwnProperty,p={key:!0,ref:!0,__self:!0,__source:!0};
+var f=require$$0,g=60103;reactJsxRuntime_production_min.Fragment=60107;if("function"===typeof Symbol&&Symbol.for){var h=Symbol.for;g=h("react.element");reactJsxRuntime_production_min.Fragment=h("react.fragment");}var m=f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,n=Object.prototype.hasOwnProperty,p={key:!0,ref:!0,__self:!0,__source:!0};
 function q(c,a,k){var b,d={},e=null,l=null;void 0!==k&&(e=""+k);void 0!==a.key&&(e=""+a.key);void 0!==a.ref&&(l=a.ref);for(b in a)n.call(a,b)&&!p.hasOwnProperty(b)&&(d[b]=a[b]);if(c&&c.defaultProps)for(b in a=c.defaultProps,a)void 0===d[b]&&(d[b]=a[b]);return {$$typeof:g,type:c,key:e,ref:l,props:d,_owner:m.current}}reactJsxRuntime_production_min.jsx=q;reactJsxRuntime_production_min.jsxs=q;
 
 var reactJsxRuntime_development = {};
@@ -37,7 +33,7 @@ var reactJsxRuntime_development = {};
 if (process.env.NODE_ENV !== "production") {
   (function() {
 
-var React = require$$0__default["default"];
+var React = require$$0;
 
 // ATTENTION
 // When adding new symbols to this file,
@@ -938,33 +934,16 @@ if (process.env.NODE_ENV === 'production') {
   jsxRuntime.exports = reactJsxRuntime_development;
 }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+var styles = {"banana":"Button-module_banana__8v-it"};
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var SvgPin = function SvgPin(props) {
-  return /*#__PURE__*/jsxRuntime.exports.jsxs("svg", _objectSpread(_objectSpread({
-    "data-name": "Layer 1",
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "0 0 122.48 122.88"
-  }, props), {}, {
-    children: [/*#__PURE__*/jsxRuntime.exports.jsx("path", {
-      d: "M121.21 36.53 85.92 1.23c-3-3-7.77.1-9.2 2.74-.24.45.19.86-.2 3.92a46.27 46.27 0 0 1-2.72 11.32l-15.69 15.7c-6.27 6.26-15.23 3.48-22.87-.32-1.62-.8-3.69-2.57-5.48-.78l-6.64 6.64a2.49 2.49 0 0 0 0 3.53L78.9 99.76a2.5 2.5 0 0 0 3.53 0l6.64-6.64c1.77-1.77-.49-4.06-1.41-6-3.4-7-6.45-16.41-.78-22.08l16.39-16.39a84.14 84.14 0 0 1 11.35-2.57c3.09-.49 3.47-.11 3.91-.4 2.71-1.74 5.7-6.15 2.68-9.17Z",
-      style: {
-        fillRule: "evenodd",
-        fill: "#2470bd"
-      }
-    }), /*#__PURE__*/jsxRuntime.exports.jsx("path", {
-      style: {
-        fill: "#1a1a1a",
-        fillRule: "evenodd"
-      },
-      d: "M53.48 82.11 40.77 69.4 0 120.96l1.92 1.92 51.56-40.77z"
+function Button(props) {
+  var lastVal = last([1, 2, 3]);
+  return /*#__PURE__*/jsxRuntime.exports.jsxs("div", {
+    className: styles.banana,
+    children: [/*#__PURE__*/jsxRuntime.exports.jsx(SvgPin, {}), /*#__PURE__*/jsxRuntime.exports.jsxs("button", {
+      children: [props.text, " -T ", lastVal]
     })]
-  }));
-};
+  });
+}
 
-exports.SvgPin = SvgPin;
-exports.jsxRuntime = jsxRuntime;
+export { Button as B, jsxRuntime as j };
