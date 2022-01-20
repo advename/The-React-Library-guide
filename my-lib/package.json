@@ -1,18 +1,14 @@
 {
   "name": "my-lib",
-  "version": "1.0.0",
-  "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "scripts": {
-    "build": "npm-run-all --sequential 'build:clean' 'build:types' 'build:bundles'",
+    "build": "npm-run-all --sequential 'build:clean' 'build:svgs' 'build:types' 'build:bundles'",
     "build:clean": "rimraf dist",
     "build:types": "tsc",
-    "build:bundles": "rollup -c"
+    "build:bundles": "rollup -c",
+    "build:svgs": "svgr --out-dir src/icons --typescript -- src/icons/svg"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.5",
@@ -23,7 +19,7 @@
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "^2.1.1",
     "@rollup/plugin-node-resolve": "^13.1.1",
-    "@rollup/plugin-url": "^6.1.0",
+    "@svgr/cli": "^6.2.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "npm-run-all": "^4.1.5",
