@@ -3,14 +3,10 @@ import { babel } from "@rollup/plugin-babel";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import postcss from "rollup-plugin-postcss";
+import alias from "@rollup/plugin-alias";
 
 // Shared
 const extensions = [".js", ".jsx", ".ts", ".tsx", ".css"];
-
-// 
-const manualChunks = {
-  icons: ["src/icons/index.tsx"]
-}
 
 export default [
   // CJS and ESM
@@ -23,14 +19,12 @@ export default [
       {
         dir: "./dist",
         format: "cjs",
-        manualChunks,
-        entryFileNames: '[name].js',
       },
       {
         dir: "./dist",
         format: "esm",
-        manualChunks,
-        entryFileNames: '[name].mjs',
+        entryFileNames: "[name].mjs",
+        chunkFileNames: "[name]-[hash].mjs",
       },
     ],
     plugins: [
@@ -45,9 +39,10 @@ export default [
         include: [/node_modules/],
       }),
       babel({
-        babelHelpers: "bundled",
+        babelHelpers: "runtime",
         include: ["src/**/*"],
         extensions,
+        skipPreflightCheck: true,
       }),
       postcss({
         // Enable CSS Modules
@@ -55,12 +50,21 @@ export default [
         // Instead of injecting all CSS in "<head>", yield it to a file
         extract: "index.css",
       }),
+      alias({
+        entries: [
+          {
+            find: "react/jsx-dev-runtime",
+            replacement: "react/jsx-dev-runtime.js",
+          },
+          { find: "react/jsx-runtime", replacement: "react/jsx-runtime.js" },
+        ],
+      }),
     ],
     // Dependencies that should not be bundled
     external: [
       ...Object.keys(pkg.dependencies || {}), // <-- UPDATED
       ...Object.keys(pkg.peerDependencies || {}), // <-- UPDATED
-      // "react/jsx-runtime",
+      "react/jsx-runtime", // <- uncommenting this removes jsx-runtime beeing bundled
     ],
   },
 ];
