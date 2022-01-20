@@ -8,6 +8,7 @@ import alias from "@rollup/plugin-alias";
 // Shared
 const extensions = [".js", ".jsx", ".ts", ".tsx", ".css"];
 
+
 export default [
   // CJS and ESM
   {
@@ -64,7 +65,7 @@ export default [
     external: [
       ...Object.keys(pkg.dependencies || {}), // <-- UPDATED
       ...Object.keys(pkg.peerDependencies || {}), // <-- UPDATED
-      "react/jsx-runtime", // <- uncommenting this removes jsx-runtime beeing bundled
+      // "react/jsx-runtime", // <- uncommenting this removes jsx-runtime beeing bundled
     ],
   },
 ];
