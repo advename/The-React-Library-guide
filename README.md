@@ -8,7 +8,7 @@ This repo is under construction.
 -  English is my fourth language, permission granted to mock my English :D
 -  If terms are used incorectly, please point me out
 -  I aimed for a `package.json` with `"type":"commonjs"` - thereby providing greatest compability for older Node.js versions. What are your thoughts on the "goal package.json".
--  Cherry picking may me erroneous and needs rework - or please point me out to what Cherry picking actually refers to.
+-  Cherry picking may be erroneous and needs rework - or please point me out to what Cherry picking actually refers to.
 -  The code examples are not finalized yet - please ignore the files in `my-lib` and `my-app`. I'm still playing around with them.
 -  Please pour as much knowledge as possible into this guide - as it will not only help me, but likely the whole dev community (okay okay,... I'll jump off my high horse now)
 -  And, thank you all so much for answering questions, the support and the time taken to look over it! Regardless of how much you will contribute from now on, I'll add any single one of you guys to the Contributors section during the release (unless inform me not to shame your name)
