@@ -6,7 +6,7 @@ const fs = require("fs");
 
 try {
   console.log("Running matchmaker");
-  const text = fs.readFileSync("./source.md", "utf-8");
+  const text = fs.readFileSync("./README.md", "utf-8");
 
   let newText = `${text.toString()}`; // copy, not reference
   let footnotes = [];
