@@ -1,24 +1,24 @@
 # :construction: Under construction :construction:
 This repo is under construction.
 
-#### For the incoming reviewers, here are some bulletpoints:
+#### For the incoming reviewers, here are some bullet points:
 -  feel free to fork and make change requests
 -  nothing has to stay, everything may be updated
--  As for now, I used inline footnotes, e.g. `^[[Text for footnote](www.example.com)]`, which unfortunately are not supported in Github. I'll fix this in the next days
+-  As for now, I used inline footnotes, e.g. `^[[Text for footnote](www.example.com)]`, which unfortunately are not supported in GitHub. I'll fix this in the next days
 -  English is my fourth language, permission granted to mock my English :D
--  If terms are used incorectly, please point me out
--  I aimed for a `package.json` with `"type":"commonjs"` - thereby providing greatest compability for older Node.js versions. What are your thoughts on the "goal package.json".
+-  If terms are used incorrectly, please point me out
+-  I aimed for a `package.json` with `"type":"commonjs"` - thereby providing the greatest compatibility for older Node.js versions. What are your thoughts on the "goal package.json".
 -  Cherry picking may be erroneous and needs rework - or please point me out to what Cherry picking actually refers to.
 -  The code examples are not finalized yet - please ignore the files in `my-lib` and `my-app`. I'm still playing around with them.
--  Please pour as much knowledge as possible into this guide - as it will not only help me, but likely the whole dev community (okay okay,... I'll jump off my high horse now)
+-  Please pour as much knowledge as possible into this guide - as it will not only help me, but likely the whole dev community (okay, okay,... I'll jump off my high horse now)
 -  And, thank you all so much for answering questions, the support and the time taken to look over it! Regardless of how much you will contribute from now on, I'll add any single one of you guys to the Contributors section during the release (unless inform me not to shame your name)
 
 
 
 # The open source Node.js/React library guide
-Building a Node.js package is no easy task and requires some foundation knowledge. Existing articles and guides often leave out the thoughts and reasons behind decisions, making it harder to debug or implement new features.
+Building a Node.js package is no easy task and requires some foundation knowledge. Existing articles and guides often omit the thoughts and reasons behind decisions, making it harder to debug or implement new features.
 
-This open source guide aims at closing down this gap, by clarifying topics required to understand later thoughts.
+This open-source guide aims at closing down this gap, by clarifying topics required to understand later thoughts.
 
 At the end of this guide, you're able to build a Node.js/React library with:
 - ES, CJS, UMD, AMD, IIFE modules support
@@ -32,7 +32,7 @@ At the end of this guide, you're able to build a Node.js/React library with:
 # Table of contents
 
 - [:construction: Under construction :construction:](#construction-under-construction-construction)
-      - [For the incoming reviewers, here are some bulletpoints:](#for-the-incoming-reviewers-here-are-some-bulletpoints)
+      - [For the incoming reviewers, here are some bullet points:](#for-the-incoming-reviewers-here-are-some-bulletpoints)
 - [The open source Node.js/React library guide](#the-open-source-nodejsreact-library-guide)
 - [Table of contents](#table-of-contents)
 - [1.0.0 – Foundation](#100--foundation)
@@ -105,7 +105,7 @@ At the end of this guide, you're able to build a Node.js/React library with:
 It's suggested to read through the following subjects, even if you already know about some of them, as we're going to cover some more in detail.
 
 ## 1.1.0 – JavaScript Environments
-Historically, JavaScript (JS) was created in 1995^[[JavaScript | wikipedia.com](https://en.wikipedia.org/wiki/JavaScript#History)], to provide interactivity to the Netscape browser. A decade later and JavaScript was *the standard* for web browsers like Internet Explorer, Firefox, Chrome, Safari, … . Even tough that JavaScript worked perfectly fine in the browser at that time, it did not provide a great development experience. This led to the creation of developers tools which improved said experience by adding a modular system to the browser.
+Historically, JavaScript (JS) was created in 1995^[[JavaScript | wikipedia.com](https://en.wikipedia.org/wiki/JavaScript#History)], to provide interactivity to the Netscape browser. A decade later and JavaScript was *the standard* for web browsers like Internet Explorer, Firefox, Chrome, Safari, … . Even though that JavaScript worked perfectly fine in the browser at that time, it did not provide a great development experience. This led to the creation of developer tools which improved said experience by adding a modular system to the browser.
 
 > **Terminology**
 > - **Modular system** Instead of having one large JavaScript file, split it up in several smaller ones and use the methods/values accross the files. The next section explains this topic in more detail.
@@ -121,12 +121,12 @@ In this context, one can think of Node.js and Browserify as being the same, wher
 Why am I saying all of this? Because it's important to know where your React package may end up being used.
 - **Browsers** - most browsers understand modern JavaScript (ES6), that you're programming in, e.g., `import React from "react"`. Still, 5% of the world browsers don't fully understand modern JavaScript^[[JavaScript modules canisue import](https://caniuse.com/es6-module)]. It's debatable if one should support these 5% too, since they already have a bunch of overheads (e.g a [polyfiller](https://developer.mozilla.org/en-US/docs/Glossary/Polyfill)) to run React all together. In any case, the alternative is using older JavaScript (ES5) which 99% of the browsers support. ^[[ECMAScript 5 \| Can I use... Support tables for HTML5, CSS3, etc.](https://caniuse.com/es5)]
 - **Node.js** has several versions^[[Previous Releases \| Node.js](https://nodejs.org/en/download/releases/)] where v16 is latest recommended one (at the date of writing, December 2021). Yet there's still a large quantity using older versions due to migration difficulties in legacy systems. Older versions, meaning prior to version 13.2.0 ^[ES6 Module support available [Node v13.2.0 (Current) \| Node.js](https://nodejs.org/en/blog/release/v13.2.0/)], Node.js only supported ECMAScript5 JavaScript^[[Previous Releases \| Node.js](https://nodejs.org/en/download/releases/)] ^[[Node By Numbers 2020 - NodeSource](https://nodesource.com/blog/node-by-numbers-2020)] and `const x = require(x)` instead of `import X from "x";`
-- **RequireJS** has still a mention worthy usage^[[RequireJS Usage Statistics](https://trends.builtwith.com/javascript/RequireJS)] which however is tiny compared to the rest of the JavaScript realm.
+- **RequireJS** has still a mention worthy usage^[[RequireJS Usage Statistics](https://trends.builtwith.com/javascript/RequireJS)] which, however, is tiny compared to the rest of the JavaScript realm.
 
-With this in mind, the next section introduces the different JavaScript module systems and looks at the integration or compability of these, in ***Old Browsers*** (ES5), ***New Browsers*** (ES6), ***Old Node.js*** (before version 13.2.0) and ***New Node.js*** (after version 13.2.0) and ***RequireJS***.
+With this in mind, the next section introduces the different JavaScript module systems and looks at the integration or compatibility of these, in ***Old Browsers*** (ES5), ***New Browsers*** (ES6), ***Old Node.js*** (before version 13.2.0) and ***New Node.js*** (after version 13.2.0) and ***RequireJS***.
 
 ## 1.2.0 – JavaScript Modules
-Because that the size of these codes grew bigger and more complex in the past years, it made sense to split up JavaScript code into separate modules that can be imported when needed.^[[JavaScript modules | developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)]
+Because that the size of these codes grown bigger and more complex in the past years, it made sense to split up JavaScript code into separate modules that can be imported when needed.^[[JavaScript modules | developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)]
 
 Meaning, a Browser application that imports several script files
 ```html
@@ -137,8 +137,8 @@ Meaning, a Browser application that imports several script files
 ```
 produces several issues:
 - All variables and functions names are exposed to the global scope (sometimes known as the namespace or global window object). E.g., if each file had a function named `function init(){...}`, then we would run into conflicts.
-- The scripts must be loaded in correct order. E.g., *cart.js* has a variable with an array that keep's track of the items in the cart. *shop.js*, which loads before *cart.js*, uses that array variable to display an "Add again" instead of "Buy" button.
-- Becomes difficult to manage, even more when adding third party packages, and so even more when these had peer dependencies. E.g. Bootstrap depended on jQuery until version 5.^[[Introduction · Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)]
+- The scripts must be loaded in correct order. E.g., *cart.js* has a variable with an array that keeps' track of the items in the cart. *shop.js*, which loads before *cart.js*, uses that array variable to display an "Add again" instead of "Buy" button.
+- Becomes difficult to manage, even more when adding third-party packages, and so even more when these have peer dependencies. E.g. Bootstrap depended on jQuery until version 5.^[[Introduction · Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)]
 
 ### 1.2.1 – Module Systems
 
@@ -149,13 +149,13 @@ The basic concepts of a module system was to apply the following patterns:
 | Module System | Appearance | Description | Integration |
 | ------------- | ---------- | ----------- | ----------- |
 | **[Immediately Invoked Function Expression(IIFE)](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)** | ~2010  | <br/> • exports only if defined to global scope <br/> • also known as a self executing anonymous function  | Works in all JavaScript environments  <br/>**Old Node.js**✅ <br/> **New Node.js**✅ <br/>**Old Browsers**✅ <br/>**New Browsers**✅<br/> **RequireJS**✅  |
-| **[CommonJS (CJS)](http://wiki.commonjs.org/wiki/CommonJS)**   | 2009  | • exports with `module.exports` <br/> • imports with `require()` <br/> • synchronous module loading <br/> • designed for general purpose JavaScript environment^[Book, [Secrets of the JavaScript Ninja, Second Edition](https://www.manning.com/books/secrets-of-the-javascript-ninja-second-edition), Chapter 11.1.2] <br/> • implemented in Node.js and therefore received the saying that it's the "server side" format <br/> • CJS code is exposed to a local scope and does not pollute the global scope  | **Old Node.js**✅ <br/> • integrated by default ^[[Modules: CommonJS modules \| Node.js v17.2.0 Documentation](https://nodejs.org/api/modules.html#modules-commonjs-modules)] <br/> **New Node.js**✅ <br/> • integrated by default ^[[Should I prefer ES modules to CommonJS? · Issue #2267 · NodeJS/help · GitHub](https://github.com/nodejs/help/issues/2267)] <br/> **Old Browsers**✅ <br/> • not supported, but works with help of [Browserify](https://github.com/browserify/browserify), that bundles to a self-contained format which has everything the application needs to run <br/> **New Browsers**✅ <br/> • same as old browser <br/> **RequireJS**❌ <br/> • not supported (there exists partial support, which should be ignored in this context ^[[javascript - Difference between RequireJS and CommonJS - Stack Overflow](https://stackoverflow.com/a/21023168)] ^[[CommonJS Notes](https://requirejs.org/docs/commonjs.html#autoconversion)] ^[[RequireJS in Node](https://requirejs.org/docs/node.html#2)]) |
+| **[CommonJS (CJS)](http://wiki.commonjs.org/wiki/CommonJS)**   | 2009  | • exports with `module.exports` <br/> • imports with `require()` <br/> • synchronous module loading <br/> • designed for general purpose JavaScript environment^[Book, [Secrets of the JavaScript Ninja, Second Edition](https://www.manning.com/books/secrets-of-the-javascript-ninja-second-edition), Chapter 11.1.2] <br/> • implemented in Node.js and therefore received the saying that it's the "server side" format <br/> • CJS code is exposed to a local scope and does not pollute the global scope  | **Old Node.js**✅ <br/> • integrated by default ^[[Modules: CommonJS modules \| Node.js v17.2.0 Documentation](https://nodejs.org/api/modules.html#modules-commonjs-modules)] <br/> **New Node.js**✅ <br/> • integrated by default ^[[Should I prefer ES modules to CommonJS? · Issue #2267 · NodeJS/help · GitHub](https://github.com/nodejs/help/issues/2267)] <br/> **Old Browsers**✅ <br/> • not supported, but works with the help of [Browserify](https://github.com/browserify/browserify), that bundles to a self-contained format which has everything the application needs to run <br/> **New Browsers**✅ <br/> • same as old browser <br/> **RequireJS**❌ <br/> • not supported (there exists partial support, which should be ignored in this context ^[[javascript - Difference between RequireJS and CommonJS - Stack Overflow](https://stackoverflow.com/a/21023168)] ^[[CommonJS Notes](https://requirejs.org/docs/commonjs.html#autoconversion)] ^[[RequireJS in Node](https://requirejs.org/docs/node.html#2)]) |
 | **[Asynchronous Module Definitions (AMD)](https://github.com/amdjs/amdjs-api)**                             | 2010^[[First AMD Proposal  wiki.commonjs.org](http://wiki.commonjs.org/index.php?title=Modules/AsynchronousDefinition&oldid=2895) ] ~ 2011^[[First AMD API commit  github.com](https://github.com/amdjs/amdjs-api/commit/954137a3a1d1c96b3a68f63c6903a17d8d4d2a0e)] | • exports with `define()` <br/> • imports with `require()` <br/> • asynchronous module loading (i.e., "lazy loading") <br/> • early fork of CommonJS^[Book, *[Building Enterprise JavaScript Applications  packtpub.com](https://www.packtpub.com/product/building-enterprise-javascript-applications/9781788477321)*, Chapter 4] <br/> • explicitly built for the browser <br/> • less popular compared to CJS due to a more complex syntax^[Book, *[Front-End Tooling with Gulp, Bower, and Yeoman  manning.com](https://www.manning.com/books/front-end-tooling-with-gulp-bower-and-yeoman)*,  Chapter 9.2]         | **Old Node.js**❌ <br/> • Not supported <br/> • possible to write AMD in Node.js for later browser usage^[[RequireJS in Node](https://requirejs.org/docs/node.html#nodeModules)] using [amdefine](https://github.com/jrburke/amdefine)  <br/> **New Node.js**❌ <br/> • same as old Node.js <br/> **Old Browsers**❌ <br/> • Not supported <br/> **New Browsers**❌ <br/> • Not supported <br/> **RequireJS**✅ <br/> • integrated by default and works on runtime, meaning compared to Browserify does not require a bundle process to work in the browser. |
 | **[Universal Module Definition (UMD)](https://github.com/umdjs/umd)**  | 2011^[[First UMD API Commit · GitHub](https://github.com/umdjs/umd/commit/51cebd3b845dbd40802de2522310c202b199977b)]  | • created to support all (at the time available) JavaScript environments, meaning CJS, AMD and Browsers <br/>  • checks the environment during runtime and   then deploys the corresponding module format, or fallbacks to make the module functionality available as variable in the global scope to support Browsers <br/>  • uses AMD as a base with special casing added to handle CJS compability^[[GitHub - umdjs/umd: UMD (Universal Module Definition) patterns for JavaScript modules that work everywhere.](https://github.com/umdjs/umd)]] <br/>  • EMS (next module system below) is not supported in UMD | **Old Node.js**✅ <br/> • supported, resolves to CJS <br/> **New Node.js**✅ <br/> • supported, resolved to CJS <br/> **Old Browsers**✅ <br/> • supported, resolves to IIFE <br/> **New Browsers**✅ <br/> • supported, resolved to IIFE <br/> **RequireJS**✅ <br/> • supported, resolved to UMD|
-| **[ES2015 Modules (ESM/ES modules)](https://262.ecma-international.org/12.0/#sec-modules)**                            | 2015 | • exports with `exports` <br/> • imports with `import`  <br/>  • previously known as ECMAScript 6 / ES6^[[ECMAScript2015 - Wikipedia](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_%E2%80%93_ECMAScript_2015)]<br/>  • synchronous and asynchronous module loading <br/>  • first official JavaScript Module specification, which means browser and Node.js will eventually support it (which it does by now except Internet Explorer)<br/>  • even a more pleasing syntax than CJS  | **Old Node.js**✅ <br/> • not supported (after version 9.6.0: experimental support exists (released in 2018) ^[[Node v9.6.0 (Current)  Node.js](https://nodejs.org/en/blog/release/v9.6.0/)]) **New Node.js**✅ <br/> • integrated, requires `"type": "module"` in `package.json` <br/> **Old Browsers**✅ <br/> • not supported, requires polyfill<br/> **New Browsers**✅ <br/> • supported, requires `<script type="module">"`<br/> **RequireJS**❌ <br/> • not supported|
+| **[ES2015 Modules (ESM/ES modules)](https://262.ecma-international.org/12.0/#sec-modules)**                            | 2015 | • exports with `exports` <br/> • imports with `import`  <br/>  • formerly known as ECMAScript 6 / ES6^[[ECMAScript2015 - Wikipedia](https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_%E2%80%93_ECMAScript_2015)]<br/>  • synchronous and asynchronous module loading <br/>  • first official JavaScript Module specification, which means browser and Node.js will eventually support it (which it does by now except Internet Explorer)<br/>  • even a more pleasing syntax than CJS  | **Old Node.js**✅ <br/> • not supported (after version 9.6.0: experimental support exists (released in 2018) ^[[Node v9.6.0 (Current)  Node.js](https://nodejs.org/en/blog/release/v9.6.0/)]) **New Node.js**✅ <br/> • integrated, requires `"type": "module"` in `package.json` <br/> **Old Browsers**✅ <br/> • not supported, requires polyfill<br/> **New Browsers**✅ <br/> • supported, requires `<script type="module">"`<br/> **RequireJS**❌ <br/> • not supported|
 
 
-(Above table is based on following additional sources: [Source 1](https://exploringjs.com/es6/ch_modules.html#sec_overview-modules) | [Source 2](https://www.manning.com/books/secrets-of-the-javascript-ninja-second-edition) | [Source 3](https://addyosmani.com/writing-modular-js) | [Source 4](https://medium.com/sungthecoder/javascript-module-module-loader-module-bundler-es6-module-confused-yet-6343510e7bde) | [Source 5](https://www.manning.com/books/front-end-tooling-with-gulp-bower-and-yeoman) | [Source 6](https://www.packtpub.com/product/building-enterprise-javascript-applications/9781788477321) | [Source 7](http://tagneto.blogspot.com/2011/04/on-inventing-js-module-formats-and.html) | [Source 8](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/ch11s02.html) | [Source 9](https://requirejs.org/docs/whyamd.html) | [Source 10](https://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs) | [Source 11](https://link.springer.com/book/10.1007/978-1-4842-0662-1))
+(Above table is based on the following additional sources: [Source 1](https://exploringjs.com/es6/ch_modules.html#sec_overview-modules) | [Source 2](https://www.manning.com/books/secrets-of-the-javascript-ninja-second-edition) | [Source 3](https://addyosmani.com/writing-modular-js) | [Source 4](https://medium.com/sungthecoder/javascript-module-module-loader-module-bundler-es6-module-confused-yet-6343510e7bde) | [Source 5](https://www.manning.com/books/front-end-tooling-with-gulp-bower-and-yeoman) | [Source 6](https://www.packtpub.com/product/building-enterprise-javascript-applications/9781788477321) | [Source 7](http://tagneto.blogspot.com/2011/04/on-inventing-js-module-formats-and.html) | [Source 8](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/ch11s02.html) | [Source 9](https://requirejs.org/docs/whyamd.html) | [Source 10](https://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs) | [Source 11](https://link.springer.com/book/10.1007/978-1-4842-0662-1))
 
 
 > **Notes**:
@@ -170,8 +170,8 @@ Most likely, ESM and maybe CJS are the only formats you will ever develop in. It
 
 #### IIFE
 The IIFE syntax is fairly simple. 
-- Wrap a function inside parantheses and append parantheses next to the first one `(function () {...})()`
-- Add the module pattern by returning a value inside the function and assigning it to a variable  `const myValue = (function () { return ... })()`, et voila, there you have the IIFE
+- Wrap a function inside parentheses and append parentheses next to the first one `(function () {...})()`
+- Add the module pattern by returning a value inside the function and assigning it to a variable  `const myValue = (function () { return ... })()`, et voilà, there you have the IIFE
 
 ```js
 const mathFuncs = (function () {
@@ -184,7 +184,7 @@ const mathFuncs = (function () {
 
 console.log(mathFuncs.add(1,1));
 ```
-Above approach minimizes global scope pollution and allows to organize entire modules.
+The above approach minimizes global scope pollution and allows organizing entire modules.
 
 #### CJS
 CJS exports are done with `module.exports` and the exported value type can be any primitive (string, number, ...), object, array or method. 
@@ -208,7 +208,7 @@ AMD syntax is probably the most difficult one to understand, so lets go through 
 define(id?, dependencies?, factory);
 ```
 Where:
-- `id` - optional argument which specifies the name of the module being defined. If not specified then the module name is its file location + name. It's common not to specify a name and just use the file location + name.
+- `id` - optional argument which specifies the name of the module being defined. If not specified, then the module name is its file location + name. It's common not to specify a name and just use the file location + name.
 - `dependencies` - optional array of dependencies. If not specified or empty means that the module has no dependencies.
 - `factory` - the function to run in this module. It should be noted that the `factory` function **must** return a value, which can be any type of primitive, object, array or method.
 
@@ -220,9 +220,9 @@ Where:
 - `dependencies` - optional array of dependencies. If not specified or empty means that the module has no dependencies.
 - `callback`: A callback function that’s executed when the (optional) dependencies modules are loaded
 
-Two important thing to know here is that there is:
-- **one way to define a module** and that is with the `define()` method.
-- **two ways to import a module** and that is with the `define()` and `require()` method. The difference between them is that `define()` is never executed unless it has been imported by a `require()` method. `require()`  is what triggers executions. It is generally only used once in the top level of your application, and serves as the entry point which then calls the rest of your application. It can aswell by used anywhere to execute an immediate callback method^[[Dojo require vs define \| Dimitri's tutorials](https://dimitr.im/dojo-require-vs-define) ]
+Two important things to know here is that there is:
+- **one way to define a module,** and that is with the `define()` method.
+- **two ways to import a module,** and that is with the `define()` and `require()` method. The difference between them is that `define()` is never executed unless it has been imported by a `require()` method. `require()`  is what triggers executions. It is generally only used once in the top level of your application, and serves as the entry point which then calls the rest of your application. It can as well by used anywhere to execute an immediate callback method^[[Dojo require vs define \| Dimitri's tutorials](https://dimitr.im/dojo-require-vs-define) ]
 
 Let's define a module.
 **`/utils/add.js`**
@@ -253,7 +253,7 @@ require(["app"] , function (app) {
 ```
 
 #### UMD
-UMD has many format variations, called templates. They distinguish in conditional statements that checks to see which module system is in use in the current environment, if any. Thus, there are some templates that support AMD and Browsers, or Node.js and AMD,... or all three of them.
+UMD has many format variations, called templates. They distinguish in conditional statements that check to see which module system is in use in the current environment, if any. Thus, there are some templates that support AMD and Browsers, or Node.js and AMD,... or all three of them.
 
 A basic UMD format looks like:
 ```js
@@ -281,7 +281,7 @@ A basic UMD format looks like:
 }));
 ```
 
-Primarily you would program in ESM or CJS these days and use a bundler or transpiler to transform the code to UMD for browser usage. Most bundlers and transpilers (e.g. Webpack, Rollup, Babel,...) these days use a UMD template, which supports all environments, aka AMD, CJS and Browsers.
+Primarily, you would program in ESM or CJS these days and use a bundler or transpiler to transform the code to UMD for browser usage. Most bundlers and transpilers (e.g. Webpack, Rollup, Babel,...) these days use a UMD template, which supports all environments, aka AMD, CJS and Browsers.
 
 #### ESM
 This is probably the syntax you are most familiar with. `import` and `export` can only be used in the top-level.
@@ -302,11 +302,11 @@ console.log(add(1, 1)); // -> 2
 ```
 
 ### 1.2.3 – Dynamic vs Static module loading
-In dynamic module loading imports and exports are resolved at runtime. Therefore imports and exports can be loaded inside functions or conditionals.
+In dynamic module loading, imports and exports are resolved at runtime. Therefore, imports and exports can be loaded inside functions or conditionals.
 
-In static module loading, imports and exports are resolved during compile time - that is before the script starts executing (=runtime). Hence, making it impossible to wrap imports and exports in conditionals since the compiler does not know the state of the condition (only known during runtime) ^[[Static module resolution](http://calculist.org/blog/2012/06/29/static-module-resolution/)]. 
+In static module loading, imports and exports are resolved during compile time - that is, before the script starts executing (=runtime). Hence, making it impossible to wrap imports and exports in conditionals since the compiler does not know the state of the condition (only known during runtime) ^[[Static module resolution](http://calculist.org/blog/2012/06/29/static-module-resolution/)]. 
 
-Lets have a look at the following CJS example^[[Stolen from here](https://exploringjs.com/es6/ch_modules.html#_benefit-faster-lookup-of-imports)] , where you have to run the code to determine what it imports:
+Let's have a look at the following CJS example^[[Stolen from here](https://exploringjs.com/es6/ch_modules.html#_benefit-faster-lookup-of-imports)] , where you have to run the code to determine what it imports:
 ```js
 var mylib;
 if (Math.random()) {
@@ -316,7 +316,7 @@ if (Math.random()) {
 }
 ```
 
-Until ESM, you had to execute code in order to find out what module was loaded or not. Static module loading gives you less flexibility, but it comes with several benefits.
+Until ESM, you had to execute code to find out what module was loaded or not. Static module loading gives you less flexibility, but it comes with several benefits.
 - **code is more readable** - developers and tools (e.g. bundlers) can understand the code without running the code (Modules can be statically analyzed)
 - **code runs faster** - exports are "pre-defined" before even running the script (static) ^[https://exploringjs.com/es6/ch_modules.html#_benefit-faster-lookup-of-imports] ^[[node.js - The difference between "require(x)" and "import x" - Stack Overflow](https://stackoverflow.com/a/46677972/3673659)]
 - **tree shaking** - bundlers can remove unused exports since they are certain which ones will be used (more about that in a bit) ^[https://exploringjs.com/es6/ch_modules.html#_benefit-dead-code-elimination-during-bundling]
@@ -421,16 +421,16 @@ export default = 3;
 ```
 Making the following possible in ESM files `import banana, {a,b} from "./file` where banana equals `3`.
 
-Node's CJS implementation on the other hand allows for a default export or any number of named exports **but not both together**.
+Node's CJS implementation, on the other hand, allows for a default export or any number of named exports, but not both together**.
 
 Transpilers tried to fix this conflict between ESM and CJS by sugarcoating ES modules with default exports. Default exports exist to act as an ES module replacement for CJS and AMD concepts where exports are a single object. ^[[TypeScript: Documentation - Modules](https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require)] ^[chapter 12 p181 [JavaScript Next \| SpringerLink](https://link.springer.com/book/10.1007/978-1-4842-5394-6)] ^[[Avoid Export Default - TypeScript Deep Dive](https://basarat.gitbook.io/typescript/main-1/defaultisbad#poor-discoverability)] ^[[ModuleImport](https://esdiscuss.org/topic/moduleimport#content-86)]
 
 The transitional replacement comes with several downfalls, here to name a few.
 - default exports shift the responsibility to the consumer to decide what to call that export, making it implicit and more difficult to refactor
-- IDE's that support IntelliSense can not help with auto-completion ^[chapter 12 p181 [JavaScript Next \| SpringerLink](https://link.springer.com/book/10.1007/978-1-4842-5394-6)] ^[[Avoid Export Default - TypeScript Deep Dive](https://basarat.gitbook.io/typescript/main-1/defaultisbad#poor-discoverability)]
+- IDE's that support IntelliSense cannot help with auto-completion ^[chapter 12 p181 [JavaScript Next \| SpringerLink](https://link.springer.com/book/10.1007/978-1-4842-5394-6)] ^[[Avoid Export Default - TypeScript Deep Dive](https://basarat.gitbook.io/typescript/main-1/defaultisbad#poor-discoverability)]
 - cleaner syntax for dynamic `import()` functions, nesting object elements in a `default` property ^[[Avoid Export Default - TypeScript Deep Dive](https://basarat.gitbook.io/typescript/main-1/defaultisbad#dynamic-imports)]
 
-Additionally, you'll find many considerable high value resources on why one should avoid default exports:
+Additionally, you'll find many considerable high-value resources on why one should avoid default exports:
 - [Mui, 2nd most popular React UI library RFC discussion to drop default exports](https://github.com/mui-org/material-ui/issues/21862)
 - [TypeScript Deep Dive on avoiding export default -](https://basarat.gitbook.io/typescript/main-1/defaultisbad#dynamic-imports)
 - [Rich Harris (creator of Rollup and Svelte) highlighting default exports issues](https://github.com/rollup/rollup/issues/1078#issuecomment-268286496)
@@ -512,13 +512,13 @@ Additionally, most bundlers only allow tree shaking in production environments.
 > The same goes to transpiling your code with Typescript. You have to set `"module": "esnext"` or `"module": "es6"` to prevent typescript from replacing your `import`'s with `require`'s. `esnext` is just a dynamic value indicating the latest ECMAScript version.
 
 ### 1.3.3 – Side Effect
-A *side effect* is not a bundler or JavaScript specific term.
+A *side effect* is not a bundler or JavaScript-specific term.
 It is a general programming concept about **behaviors of functions** (and not modules). A function is said to have side effect if it tries to modify anything outside its body (scope). For example, if it modifies a global variable, then it is a side effect. If it makes a network call, it is a side effect as well. A function that contains a side effect is also named an *impure* function. ^[[The Not-So-Scary Guide to Functional Programming \| YLD Blog](https://www.yld.io/blog/the-not-so-scary-guide-to-functional-programming/)]  ^[Chapter 5 [React Hooks in Action](https://www.manning.com/books/react-hooks-in-action)] ^[[Master the JavaScript Interview: What is Functional Programming? \| by Eric Elliott | JavaScript Scene | Medium](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)]
 
-- **Pure** functions returns always the same output, given the same input. It is predictable.
-- **"Impure"** functions **directly mutates** variables, state, data outside of its body.
+- **Pure** functions always return the same output, given the same input. It is predictable.
+- **"Impure"** functions **directly mutates** variables, state, data outside its body.
 
-Sounds confusing? Stay with me as we go through an example with a pure and impure function, where the latter function modifies state outside of its body.
+Sounds confusing? Stay with me as we go through an example with a pure and impure function, where the latter function modifies state outside its body.
 ```js
 let myValue = 1;
 
@@ -577,10 +577,10 @@ To name a few side effects in a JavaScript application:
   - creating a subscription `window.addEventListener("resize", runWhenPageResized)`
 - importing global CSS `import "./scss/main.scss"`, we need to treat any CSS as potentially having side effects  because even CSS modules can define global CSS ^[Chapter 2 - Loaders - CSS in JS[Modern JavaScript Tools & Skills [Book]](https://www.oreilly.com/library/view/modern-javascript-tools/9781492068129/)]
 - timer functions like `setTimeout()` or `setInterval()`
-- ajax calls. Fetching data can lead to unintended side effects. What if the data is falsy or the fetch fails?
+- Ajax calls. Fetching data can lead to unintended side effects. What if the data is falsy or the fetch fails?
 
 #### Side effect in a Bundler and React
-At a later point, we need to know the two different interpretation for side effects in React and a bundler.
+At a later point, we need to know the two-different interpretations for side effects in React and a bundler.
 
 **In a bundler**, a side effect means that your file does something other than just exporting functions, classes, etc. A very common example is loading a `.css` file. Any `.css`  file can potentially alter your entire app, so for the app to work correctly the CSS needs to be loaded even if your app doesn't reference the code in the file that imports the CSS. The bundler needs to know about this so that it can perform tree shaking so that any file that has side effects needs to be included whether it appears to be used or not.
 
@@ -597,7 +597,7 @@ Thus, for a React library, you should only mark CSS files (`.css`, `.sass`, … 
 > **REVIEWER NOTICE**
 > THIS SECTION MAY BE WRONG AND NEEDS REWORK.
 
-Cherry-picking reduces the final bundle size of an application by only importing specific parts or components of a library, instead the whole. 
+Cherry-picking reduces the final bundle size of an application by only importing specific parts or components of a library, instead of the whole. 
 This only works:
 - with libraries that export in CJS or EMS 
 - when the selected part or component is side effect free. 
@@ -630,7 +630,7 @@ In Node.js, these dependency types are specified in the `package.json` file with
 
 As by an example, we have a library that contains all three types of dependencies, specified in its `package.json` file.
 When an application adds this library, the following happens:
-- `dependencies` – These dependencies are installed alongside the library. Each dependency is installed in the root `node_modules` directory, if it doesn't already exist. If it does exist, then versions are checked to see if they are compatible. In case of incompatible versions, the same dependency but of another version is installed in the library's directory, in its own `node_module` directory.
+- `dependencies` – These dependencies are installed alongside the library. Each dependency is installed in the root `node_modules` directory if it doesn't already exist. If it does exist, then versions are checked to see if they are compatible. In case of incompatible versions, the same dependency but of another version is installed in the library's directory, in its own `node_module` directory.
 - `devDependencies` These dependencies are not installed alongside the library.
 - `peerDependencies` – These dependencies are not installed alongside the library. The library checks if it can use the application's provided dependency version, or else throws an error.
 
@@ -641,10 +641,10 @@ React is always to be considered as a peer dependency in a React specific librar
 ## 2.1.0 – How does a library work?
 Installing a library can be done in several ways, but the most common are:
 - **npm/yarn** (e.g.,`npm install lodash`)
-- **using a script tag**, that links to a file or a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) link (e.g., `<script src="https://unpkg.com/browse/lodash@4.17.21/" />`)
+- **using a script tag** that links to a file or a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) link (e.g., `<script src="https://unpkg.com/browse/lodash@4.17.21/" />`)
 - **adding the package files manually** by extracting them from the source. This is only reasonable in a browser environment.
 
-Whenever a consuming application installs a library with `npm install <package-name>`, the consuming application looks for the library's `package.json` file. This file contains the library's usage instruction, specified in fields. The same applies to CDN's, which read the `package.json` file to know what to output in their CDN links.
+Whenever a consuming application installs a library with `npm install <package-name>`, the consuming application looks for the library's `package.json` file. This file contains the library's usage instructions, specified in fields. The same applies to CDN's, which read the `package.json` file to know what to output in their CDN links.
 
 The following fields are the important ones to a library author.
 
@@ -669,7 +669,7 @@ Except `main`, `browser`, `files` and `exports`, all fields are widely accepted 
 ### 2.0.1 – Multi module libraries
 In a library's `package.json` file, the `main` field instructs Node.js how to include the library in an application. In the past, this sufficed since Node.js was built on a single module system, CJS.
 
-With the introduction of ES modules, there were now two module systems. Interoperating between them and transitioning to ESM turned out to be problematic ^[https://2ality.com/2019/04/nodejs-esm-impl.html#interoperability]. With the `main` field, library authors had to decide whether to output CJS or ES modules. As a result, it became a common pattern for library authors to built to both CJS and ES modules in a package, where `main` pointed to a CJS entrypoint and `module` to an ESM entrypoint ^[https://2ality.com/2019/10/hybrid-npm-packages.html#legacy-approach-for-putting-es-modules-on-npm]. The `module` field, serving ESM, is only used by bundlers and other build tools, since Node.js ignored (and still ignores) said field ^[[Modules: Packages \| Node.js v17.3.0 Documentation](https://nodejs.org/api/packages.html#dual-commonjses-module-packages)]. This allowed for best backwards compatibility for older Node.js version, while using bundlers tree shaking advantages with the ESM entrypoint.
+With the introduction of ES modules, there were now two module systems. Interoperating between them and transitioning to ESM turned out to be problematic ^[https://2ality.com/2019/04/nodejs-esm-impl.html#interoperability]. With the `main` field, library authors had to decide whether to output CJS or ES modules. As a result, it became a common pattern for library authors to build to both CJS and ES modules in a package, where `main` pointed to a CJS entry point and `module` to an ESM entrypoint ^[https://2ality.com/2019/10/hybrid-npm-packages.html#legacy-approach-for-putting-es-modules-on-npm]. The `module` field, serving ESM, is only used by bundlers and other build tools, since Node.js ignored (and still ignores) said field ^[[Modules: Packages \| Node.js v17.3.0 Documentation](https://nodejs.org/api/packages.html#dual-commonjses-module-packages)]. This allowed for best backwards compatibility for older Node.js versions, while using bundlers tree shaking advantages with the ESM entry point.
 
 Today, since Node.js v13.7.0, a library can now contain both CJS and ES module entry points at the same time.
 - files ending in `.mjs` are treated as ES modules ^[[Modules: Packages \| Node.js v14.18.2 Documentation](https://nodejs.org/docs/latest-v14.x/api/packages.html#packages_package_json_and_file_extensions)]
@@ -683,17 +683,17 @@ Today, since Node.js v13.7.0, a library can now contain both CJS and ES module e
 #### The `exports` field
 The `exports` field provides an alternative to the `main` field, while also being able to specify separate entry points for CJS and ESM files. `main` is overridden by `exports` if it exists.
 
-The `exports` field either accepts a single entrypoint, acting like the `main` field, or accepts an object of multiple subpaths and/or pre-defined conditions to construct several entry points ^[https://2ality.com/2019/10/hybrid-npm-packages.html#option-3%3A-bare-import-esm%2C-deep-import-commonjs-with-backward-compatibility]. Conditions provide a way to use different entry points depending on certain conditions, also known as **conditional exports**.
+The `exports` field either accepts a single entry point, acting like the `main` field, or accepts an object of multiple subpaths and/or pre-defined conditions to construct several entry points ^[https://2ality.com/2019/10/hybrid-npm-packages.html#option-3%3A-bare-import-esm%2C-deep-import-commonjs-with-backward-compatibility]. Conditions provide a way to use different entry points depending on certain conditions, also known as **conditional exports**.
 
 Some conditions are:
 - `import` indicates which file will be selected when using an ESM `import` statement or `import()` expression
 - `require` indicates which file will be selected when using a CJS `require()` method.
 - `default` is the generic fallback, can be a CJS or ESM file.
-- `types` indicates the typescript definition entrypoint **work in progress** ^[[Support for NodeJS 12.7+ package exports · Issue #33079 · microsoft/TypeScript · GitHub](https://github.com/microsoft/TypeScript/issues/33079)]
+- `types` indicates the typescript definition entry point **work in progress** ^[[Support for NodeJS 12.7+ package exports · Issue #33079 · microsoft/TypeScript · GitHub](https://github.com/microsoft/TypeScript/issues/33079)]
 
-The order of the conditions in the object matters. Therefore, `default` should always come last. Additionally, all conditions in the above lists are Node.js conditions, `types` which is a typescript specific condition ignored by Node.js.
+The order of the conditions in the object matters. Therefore, `default` should always come last. Additionally, all conditions in the above lists are Node.js conditions, `types` which is a typescript-specific condition ignored by Node.js.
 
-Example of a single entrypoint.
+Example of a single entry point.
 ```json
 {
   "main": "./lib/index.js",
@@ -768,7 +768,7 @@ It is recommended to keep `main`, `module` and `types` field as fallbacks for ol
 
 
 ### 2.1.2 – What to expose?
-There is no single correct answers as it depends on *compatibility* and *performance*. We will deal later on with the implementations. 
+There is no single correct answer as it depends on *compatibility* and *performance*. We will deal later on with the implementations. 
 
 A new React library, should output in its `package.json`
 ```js
@@ -818,7 +818,7 @@ A new React library, should output in its `package.json`
 }
 ```
 
-You will find many `package.json` variations on the web for libraries. These may differ in prioritizing ESM over CJS ^[https://nodejs.org/api/packages.html#dual-commonjses-module-packages], completely ignore a UMD bundle for CDNs or use multiple `package.json`'s to create a more optimized setup. ^[https://2ality.com/2019/10/hybrid-npm-packages.html#option-4%3A-bare-import-esm%2C-deep-import-commonjs-with-.mjs-and-.cjs]
+You will find many `package.json` variations on the web for libraries. These may differ in prioritizing ESM over CJS ^[https://nodejs.org/api/packages.html#dual-commonjses-module-packages], entirely ignore a UMD bundle for CDNs or use multiple `package.json`'s to create a more optimized setup. ^[https://2ality.com/2019/10/hybrid-npm-packages.html#option-4%3A-bare-import-esm%2C-deep-import-commonjs-with-.mjs-and-.cjs]
 
 These variations are, just like ours, slightly opinionated and should be carefully selected, i.e., you should understand the choices made to do X over Y.
 
@@ -841,7 +841,7 @@ As an example, here are the [published www.npm.com files](https://unpkg.com/brow
 Now that we have all the basic knowledge and understand the different factors, let's get our hands dirty.
 
 ### 3.0.1 – Setting up the demo library
-The next sections are going to be based on a demo React library, that outputs a single `<Button>` component. The library will use typescript, which should be expected from library authors in 2021. We will add SCSS Modules and images later on.
+The next sections will be based on a demo React library, that outputs a single `<Button>` component. The library will use typescript, which should be expected from library authors in 2021. We will add SCSS Modules and images later on.
 
 > The demo library is built with `yarn` as the package manager, which is recommended, but you may also choose `npm` if that suits you better.
 
@@ -957,7 +957,7 @@ Wait, where are the default exports?
 Experienced developers might wonder why we didn't use default exports, i.e., `export { default as Button } from "./Button"`. We've already discussed this topic in "Interoperability, named and default Exports", but in short, named exports are the right way.
 
 ## 3.1.0 – Bundling and Transpiling
-There are lots of different ways to transpile or bundle our library. First, let's address some important topics.
+There are plenty of different ways to transpile or bundle our library. First, let's address some important topics.
 
 ### 3.1.1 – Is a bundler needed?
 A bundler goes hand in hand with a transpiler, but a transpiler does not depend on a bundler.
@@ -971,17 +971,17 @@ For example:
 - **[react-bootstrap](https://github.com/react-bootstrap/react-bootstrap)**, a component library that uses *other resources* like stylesheets uses a bundler to yield CJS, ESM, UMD bundles and typescript types (notice the execution of the `build.js` file ^[[package.json links to the build.js file](https://github.com/react-bootstrap/react-bootstrap/blob/260671c858911e238576fbc5a85f677f96059a2a/package.json#L36)] which eventually runs the Webpack ^[[react-bootstrap/build.js at dec919bf9bb0cb3153f3e3afe6a486968b218329 · react-bootstrap/react-bootstrap · GitHub](https://github.com/react-bootstrap/react-bootstrap/blob/dec919bf9bb0cb3153f3e3afe6a486968b218329/tools/build.js)] bundler) 
 
 
-Therefore, as a **rule of thumb use a bundler for all output formats, until you know** that a transpiler suits you better, with strong emphasis on the "until you know".
+Therefore, as a **rule of thumb, use a bundler for all output formats, until you know** that a transpiler suits you better, with strong emphasis on the "until you know".
 
 ### 3.1.2 – Tools
 
 #### Transpilers
 Out of the many transpilers on the market, probably the most popular ones are [Babel](https://babeljs.io/) and TypeScript's  [`tsc`](https://www.typescriptlang.org/docs/handbook/compiler-options.html) tool. 
 The main differences between them are:
-- `tsc` is for typescript driven projects only. 
+- `tsc` is for typescript-driven projects only. 
 - only `tsc` performs type-checking during transpilation time
 - `tsc` asks you to specify an ES version to compile to ^[[TypeScript: TSConfig Reference - Docs on every TSConfig option](https://www.typescriptlang.org/tsconfig#target)], while in Babel you specify a range of environments and browsers you want to support ^[[@babel/preset-env · Babel](https://babeljs.io/docs/en/babel-preset-env/#targets)]
-- Babel is missing a few typescript features ^[[@babel/plugin-transform-typescript · Babel](https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats)], which, however, would probably only bother > 5% of the Typescript community. (E.g., partial `namespace` support, but its usage is discouraged anyways ^[[Are namespaces legacy? · Issue #30994 · microsoft/TypeScript · GitHub](https://github.com/microsoft/TypeScript/issues/30994#issuecomment-492017219)] ; and P.S.A `const enums` are now supported ^[[7.15.0 Released: Hack-style pipelines, TypeScript const enums and Rhino target support · Babel](https://babeljs.io/blog/2021/07/26/7.15.0)])
+- Babel is missing a few typescript features ^[[@babel/plugin-transform-typescript · Babel](https://babeljs.io/docs/en/babel-plugin-transform-typescript#caveats)], which, however, would probably only bother > 5% of the Typescript community. (E.g., partial `namespace` support, but its usage is discouraged anyway ^[[Are namespaces legacy? · Issue #30994 · microsoft/TypeScript · GitHub](https://github.com/microsoft/TypeScript/issues/30994#issuecomment-492017219)] ; and P.S.A `const enums` are now supported ^[[7.15.0 Released: Hack-style pipelines, TypeScript const enums and Rhino target support · Babel](https://babeljs.io/blog/2021/07/26/7.15.0)])
 
 That being so, Babel is a powerful, feature-rich and versatile transpiler, that also supports typescript. The lack of type-checkings makes Babel obviously run faster, and modern IDE's like [VSCode](https://code.visualstudio.com/) have built in type-checks ^[[TypeScript Compiling with Visual Studio Code](https://code.visualstudio.com/docs/typescript/typescript-compiling)] thanks to [`tsserver`](https://github.com/Microsoft/TypeScript/wiki/Standalone-Server-%28tsserver%29)
 
@@ -1069,7 +1069,7 @@ npx tsc
 ```
 The above command created the `/dist/types/index.d.ts` file along all connected sub files, paths, and definition maps. It used by default the `tsconfig.json` configuration file.
 
-Since we're using [`include`](https://www.typescriptlang.org/tsconfig#include) to specify the compilers source directory, we don't have to exclude `node_modules` which exists in a directory above `/src`. Only test files should be excluded here.
+Since we're using [`include`](https://www.typescriptlang.org/tsconfig#include) to specify the compiler source directory, we don't have to exclude `node_modules` which exists in a directory above `/src`. Only test files should be excluded here.
 
 ### 3.2.2 – Step 2 – Transpile with Babel
 To begin with, install all the required babel dependencies as dev dependencies.
@@ -1247,7 +1247,7 @@ As for now, all our dependencies are specified as `devDependencies` – meaning 
 
 React being a peer dependency, we expect the consuming application to provide the React installation.
 
-Lodash on the other hand is different. Do we expect the consuming application to have lodash installed, just like React? Not really. Do we need lodash to run the library? Definitely. Therefore, we have to move Lodash to the regular dependencies, ensuring it's added alongside the library.
+Lodash, on the other hand, is different. Do we expect the consuming application to have lodash installed, just like React? Not really. Do we need lodash to run the library? Definitely. Therefore, we have to move Lodash to the regular dependencies, ensuring it's added alongside the library.
 
 > If, two different libraries (A and B) depend on the same library C, and the first library (A) requires exactly version 2.4.1 of library C, while the other library (B) depends on 2.4.5, then both version of library C are installed in the respective library's `node_modules` directory, e.g., `node_modules/lib-a/node_modules/lib-c` and `node_modules/lib-b/node_modules/lib-c`.
 
@@ -1390,7 +1390,7 @@ Running Rollup again.
 ```sh
 npx rollup -c
 ```
-The new bundled files have now the expected sizes.
+The new bundled files now have the expected sizes.
 ```sh
 my-lib/ 
 └── dist/
@@ -1407,12 +1407,12 @@ my-lib/
 Why did we not specify `lodash-es` in the `external` array for the UMD bundle? 
 Because, we actually want `lodash-es` to be part of our UMD bundle.
 
-Our CJS and ESM bundles are targeted for Node.js environments, where as the UMD bundle is intended to be directly included in browsers with CDN links and `<script>` tags. In any case, peer dependencies should never be bundled.
+Our CJS and ESM bundles are targeted for Node.js environments, whereas the UMD bundle is intended to be directly included in browsers with CDN links and `<script>` tags. In any case, peer dependencies should never be bundled.
 
 **In Node.js**, all dependencies are managed with `npm`/`yarn` and `package.json`, meaning we don't have to include any regular dependencies in our bundles (and never should).
 
 **In Browsers,** on the other hand, where we use CDN links and `<script>` tags, we don't have the luxury of package managers. We rely entirely on already included libraries, or included libraries that bundle their dependencies. Package management in the browser is left to the consumer. Here, the library author must decide what they consider as peer dependencies and regular dependencies, and only include regular dependencies in the final bundle. For example:
-- The most popular React component library [Material UI](https://github.com/mui-org/material-ui) has included all dependencies, except the peer dependency `react` and `react-dom` leading to a [bloated, unminified, file size of 1.29MB](https://unpkg.com/browse/@material-ui/core@4.12.3/umd/)
+- The most popular React component library, [Material UI](https://github.com/mui-org/material-ui) has included all dependencies, except the peer dependency `react` and `react-dom` leading to a [bloated, unminified, file size of 1.29MB](https://unpkg.com/browse/@material-ui/core@4.12.3/umd/)
 - Until Bootstrap 5, [`jQuery`](https://github.com/jquery/jquery) and [`popper`](https://github.com/floating-ui/floating-ui) were considered as peer dependencies. Users first had to include both dependencies before they could use Bootstrap in the browser.
 
 In essence, in browser targeted bundles (UMD, IIFE or browser dedicated ESM), include the regular dependencies in your bundles.
@@ -1497,8 +1497,8 @@ npm install --save-dev rimraf npm-run-all
 ```
 
 Where:
-- [`rimraf`](https://github.com/isaacs/rimraf) – Cross platform (Windows, Mac, Linux) `rm -rf` (remove) Linux alternative. Rollup or Typescript does not clean up the `/dist` directory themself.
-- [`npm-run-all`](https://github.com/mysticatea/npm-run-all) – Cross platform tool to run multiple npm-scripts parallel or sequential.
+- [`rimraf`](https://github.com/isaacs/rimraf) – Cross platform (Windows, Mac, Linux) `rm -rf` (remove) Linux alternative. Rollup or Typescript does not clean up the `/dist` directory themselves.
+- [`npm-run-all`](https://github.com/mysticatea/npm-run-all) – Cross-platform tool to run multiple npm-scripts parallel or sequential.
 
 Then update the `package.json`.
 ```js
@@ -1582,14 +1582,14 @@ At the end, we expose all our bundles in the `package.json`.
 We achieved our final `package.json` goal.
 
 ## 3.3.0 – Additional Steps
-We've seen the basic setup and configuration of our library build. In addition, there are many additional steps that can be added to handled other kind of resources.
+We've seen the basic setup and configuration of our library build. In addition, there are many additional steps that can be added to handle other kinds of resources.
 
 ### 3.3.1 – Images
-Handling images in a library always is a tricky part. How do we guarantee that image imports are correctly resolved, when an application consumes our library?
+Handling images in a library is always a tricky part. How do we guarantee that image imports are correctly resolved when an application consumes our library?
 
-A popular solution to this question is converting the image to Base64, and inline it **in the HTML**. This completely removes the need for import resolution. However, this leads to a 33% increase in disk size. Therefore, as a general advice, keep the amounts and sizes of images in a library to a minimum and limit yourself mainly to SVG images.
+A popular solution to this question is converting the image to Base64, and inline it **in the HTML**. This completely removes the need for import resolution. However, this leads to a 33% increase in disk size. Therefore, as a general advice, keep the amount and sizes of images in a library to a minimum and limit yourself mainly to SVG images.
 
-Handling and converting images can be done with the help of the [`@rollup/plugin-image`](https://github.com/rollup/plugins/tree/master/packages/image) plugin. The plugin handles JPG, PNG, GIF, SVG and WebP files.
+Handling and converting images can be done thanks to the [`@rollup/plugin-image`](https://github.com/rollup/plugins/tree/master/packages/image) plugin. The plugin handles JPG, PNG, GIF, SVG and WebP files.
 
 ```sh
 yarn add --dev @rollup/plugin-image
@@ -1715,7 +1715,7 @@ Developing a library differs a little to the way we're used to.
 ### 4.0.1 – Local Development
 We haven't checked the `<Button>` component a single time, to see if it's actually working. Therefore, we have to somehow render it in a browser.
 
-There are many development approaches, with each their advantage and disadvantages.
+There are many development approaches, with each their advantages and disadvantages.
 
 #### Demo application
 A straightforward solution is to install a demo `create-react-app` application, putting it in a `/demo` folder in the root directory. Then, simply include the components by their paths, e.g., `import { Button } from "./../src/components/Button"`. 
@@ -1727,9 +1727,9 @@ One major downside is, that you have to set up the demo environment yourself.
 #### Component Development Tool
 Component development tools like [Storybook](https://storybook.js.org/), [Docz](https://www.docz.site/) or [Styleguidist](https://react-styleguidist.js.org/) can replace *demo applications*. These tools provide a canvas, props and code playground, allowing you to experiment with each component in an isolated sandbox. Additionally, they serve as the documentation for your library.
 
-Storybook offers the closest *demo applications* experience with all its features allowing you to quickly modify props and state. It may the best choice, but comes at a price of a steeper learning curve and more time-consuming setup, compared to Styleguidist and Docz.
+Storybook offers the closest *demo application* experience with all its features allowing you to quickly modify props and state. It may be the best choice, but comes at a price of a steeper learning curve and more time-consuming setup, compared to Styleguidist and Docz.
 
-For the inexperienced, Storybook should be the preferred tool.
+For the inexperienced, a Storybook should be the preferred tool.
 
 #### Include in real application
 You can also include the library from very the beginning  in a real application. This approach might be only suited for dev-teams building in-house libraries.
